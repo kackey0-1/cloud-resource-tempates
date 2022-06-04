@@ -1,4 +1,3 @@
-service:
-  message: Hello, World
+service.message: "Hello, World"
 
 

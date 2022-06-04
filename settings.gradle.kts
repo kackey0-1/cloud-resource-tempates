@@ -1,2 +1,4 @@
-rootProject.name = "cloud-resource-tempates"
-include("ex-base", "ex-app")
+rootProject.name = "cloud-resource-templates"
+
+include("ex-base")
+include("ex-app")

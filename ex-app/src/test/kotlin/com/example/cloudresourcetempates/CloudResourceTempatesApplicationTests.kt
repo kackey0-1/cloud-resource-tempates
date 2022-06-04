@@ -9,5 +9,4 @@ class CloudResourceTempatesApplicationTests {
     @Test
     fun contextLoads() {
     }
-
 }
