@@ -1,11 +1,13 @@
 package com.example.cloudresourcetempates
 
-import org.springframework.boot.context.properties.EnableConfigurationProperties
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
-@EnableConfigurationProperties(ServiceProperties::class)
-class MyService(private val serviceProperties: ServiceProperties) {
+class MyService {
+
+    @Autowired
+    private lateinit var serviceProperties: ServiceProperties
     fun message(): String {
         return serviceProperties.message
     }
