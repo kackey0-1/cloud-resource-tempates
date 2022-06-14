@@ -6,21 +6,27 @@ import org.springframework.batch.core.repository.JobRepository
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.task.SimpleAsyncTaskExecutor
+import org.springframework.core.task.TaskExecutor
 import org.springframework.scheduling.annotation.AsyncConfigurer
-
 
 @Configuration
 class AsyncConfig(
     private val jobRepository: JobRepository
 ) : AsyncConfigurer {
 
-
-    @Bean("httpRequestBasedJobLauncher")
-    fun httpRequestBasedJobLauncher(): JobLauncher {
+    @Bean
+    fun asyncJobLauncher(): JobLauncher {
         val jobLauncher = SimpleJobLauncher()
         jobLauncher.setJobRepository(jobRepository)
         jobLauncher.setTaskExecutor(SimpleAsyncTaskExecutor())
         jobLauncher.afterPropertiesSet()
         return jobLauncher
+    }
+
+    @Bean
+    fun asyncTaskExecutor(): TaskExecutor {
+        val asyncTaskExecutor = SimpleAsyncTaskExecutor()
+        asyncTaskExecutor.concurrencyLimit = 10
+        return asyncTaskExecutor
     }
 }

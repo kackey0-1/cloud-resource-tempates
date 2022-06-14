@@ -8,4 +8,3 @@
 # Run spring-batch project
 ./gradlew :spring-batch:bootRun -x flywayClean flywayMigrate
 ```
-
