@@ -1,37 +1,32 @@
 package com.example.springbatch
 
-import lombok.RequiredArgsConstructor
 import org.springframework.batch.core.Job
 import org.springframework.batch.core.Step
-import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory
 import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.Configuration
+import org.springframework.stereotype.Component
 
 
-@Configuration
-@EnableBatchProcessing
-@RequiredArgsConstructor
-class HelloConfig(
+@Component
+class HelloJobComponent(
     private val jobBuilderFactory: JobBuilderFactory,
     private val stepBuilderFactory: StepBuilderFactory
 ) {
     @Bean
-    fun fooJob(): Job {
+    fun fooJob(helloStep: Step): Job {
         println("fooJob メソッドを実行")
         return jobBuilderFactory["myFooJob"]
-            .flow(helloStep())
+            .flow(helloStep)
             .end()
             .build()
     }
 
     @Bean
-    fun barJob(): Job {
-        println("barJob メソッドを実行")
+    fun barJob(helloStep: Step, worldStep: Step): Job {
         return jobBuilderFactory["myBarJob"]
-            .flow(helloStep())
-            .next(worldStep())
+            .flow(helloStep)
+            .next(worldStep)
             .end()
             .build()
     }
