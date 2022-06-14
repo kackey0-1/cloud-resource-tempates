@@ -1,0 +1,13 @@
+
+services:
+  mysql:
+    image: mysql:5.7
+    ports:
+      - 43306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: sample
+    volumes:
+      - ./config/mysql/:/docker-entrypoint-initdb.d
+      - ./config/mysql/etc/my.cnf:/etc/mysql/conf.d/my.cnf
+
