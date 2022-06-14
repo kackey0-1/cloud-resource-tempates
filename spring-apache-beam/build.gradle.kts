@@ -24,9 +24,14 @@ repositories {
 }
 
 dependencies {
+    val apacheBeamVersion = "2.39.0"
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-batch")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
+
+    //Apache Beam
+    implementation("org.apache.beam:beam-sdks-java-core:$apacheBeamVersion")
+    implementation("org.apache.beam:beam-runners-direct-java:$apacheBeamVersion")
 
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
