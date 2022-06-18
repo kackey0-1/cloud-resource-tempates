@@ -1,4 +1,4 @@
-package com.example.springapachebeam
+package com.example.springkafka
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

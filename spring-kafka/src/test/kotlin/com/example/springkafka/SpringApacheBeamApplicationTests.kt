@@ -1,4 +1,4 @@
-package com.example.springapachebeam
+package com.example.springkafka
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest

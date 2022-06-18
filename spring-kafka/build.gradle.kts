@@ -26,7 +26,7 @@ repositories {
 dependencies {
     val apacheBeamVersion = "2.39.0"
     implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-batch")
+    implementation("org.springframework.boot:spring-kafka")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
 
     //Apache Beam

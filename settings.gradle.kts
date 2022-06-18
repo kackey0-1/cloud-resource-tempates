@@ -4,5 +4,5 @@ include(
     "ex-base",
     "ex-app",
     "spring-batch",
-    "spring-apache-beam",
+    "spring-kafka",
 )
