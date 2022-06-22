@@ -1,7 +1,6 @@
-package com.example.springkafka.kafka.config
+package com.example.springkafka.config
 
 import lombok.RequiredArgsConstructor
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.scheduling.annotation.AsyncConfigurer
@@ -12,7 +11,7 @@ import java.util.concurrent.Executor
 @Configuration
 @EnableAsync
 @RequiredArgsConstructor
-class AsyncConfig: AsyncConfigurer {
+class AsyncConfig : AsyncConfigurer {
 
     private val executorShutdownGracePeriodInSeconds = 0
 

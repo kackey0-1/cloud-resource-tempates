@@ -1,2 +1,13 @@
-kafka:
-  bootstrapAddress: localhost:9092
+spring.kafka:
+  ssl.trust-store-password: null
+  bootstrap-servers: localhost:9092
+  consumer:
+    group-id: sample-worker-local
+    auto-offset-reset: latest
+  producer:
+    acks: all
+  properties:
+    sasl.mechanism: GSSAPI
+    security.protocol: PLAINTEXT
+    ssl.endpoint.identification.algorithm: ''
+
