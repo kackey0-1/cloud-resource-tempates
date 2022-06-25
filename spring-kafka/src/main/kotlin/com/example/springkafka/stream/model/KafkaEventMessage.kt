@@ -1,4 +1,4 @@
-package org.example.template.stream.model
+package com.example.springkafka.stream.model
 
 import lombok.Value
 

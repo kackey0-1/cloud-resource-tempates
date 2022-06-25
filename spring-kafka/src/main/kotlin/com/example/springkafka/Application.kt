@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class SpringApacheBeamApplication
 
 fun main(args: Array<String>) {
-	runApplication<SpringApacheBeamApplication>(*args)
+    runApplication<SpringApacheBeamApplication>(*args)
 }

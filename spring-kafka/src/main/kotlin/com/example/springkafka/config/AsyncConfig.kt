@@ -1,6 +1,7 @@
 package com.example.springkafka.config
 
-import lombok.RequiredArgsConstructor
+import com.example.springkafka.handler.AsyncExceptionHandler
+import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.scheduling.annotation.AsyncConfigurer
@@ -10,8 +11,9 @@ import java.util.concurrent.Executor
 
 @Configuration
 @EnableAsync
-@RequiredArgsConstructor
-class AsyncConfig : AsyncConfigurer {
+class AsyncConfig(
+    private val asyncExceptionHandler: AsyncExceptionHandler
+) : AsyncConfigurer {
 
     private val executorShutdownGracePeriodInSeconds = 0
 
@@ -23,5 +25,9 @@ class AsyncConfig : AsyncConfigurer {
         executor.setAwaitTerminationMillis(executorShutdownGracePeriodInSeconds.toLong())
         executor.initialize()
         return executor
+    }
+
+    override fun getAsyncUncaughtExceptionHandler(): AsyncUncaughtExceptionHandler {
+        return asyncExceptionHandler
     }
 }
