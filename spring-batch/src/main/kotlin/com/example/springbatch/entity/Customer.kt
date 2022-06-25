@@ -1,6 +1,5 @@
 package com.example.springbatch.entity
 
-import org.hibernate.annotations.Generated
 import java.io.Serializable
 import javax.persistence.Column
 import javax.persistence.Entity

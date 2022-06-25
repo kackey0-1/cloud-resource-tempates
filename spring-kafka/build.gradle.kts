@@ -3,7 +3,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     id("org.springframework.boot") version "2.7.0"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
-    id("org.flywaydb.flyway") version "6.5.7"
     id("com.avast.gradle.docker-compose") version "0.15.2"
     kotlin("jvm") version "1.6.21"
     kotlin("plugin.spring") version "1.6.21"
@@ -24,17 +23,20 @@ repositories {
 }
 
 dependencies {
+    val apacheBeamVersion = "2.39.0"
     implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-batch")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
+
+    // Kafka
+    implementation("org.springframework.kafka:spring-kafka")
+
+    //Apache Beam
+    implementation("org.apache.beam:beam-sdks-java-core:$apacheBeamVersion")
+    implementation("org.apache.beam:beam-runners-direct-java:$apacheBeamVersion")
 
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-
-    // DB
-    runtimeOnly("mysql:mysql-connector-java")
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
     compileOnly("org.projectlombok:lombok")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
@@ -54,7 +56,7 @@ tasks {
         jvmArgs = ArrayList(jvmArgs).apply {
             add("-Dspring.profiles.active=local")
         }
-        dependsOn(flywayClean, flywayMigrate, composeUp)
+        dependsOn(composeUp)
     }
 
     withType<KotlinCompile> {
@@ -70,14 +72,7 @@ tasks {
 }
 
 dockerCompose {
-    useComposeFiles.add("../docker-compose.yml")
+    useComposeFiles.add("docker-compose.override.yml")
     isRequiredBy(project.tasks.getByName("bootRun"), )
 }
-
-flyway {
-    url = "jdbc:mysql://127.0.0.1:43306/sample?useSSL=false"
-    user = "root"
-    password = "root"
-}
-
 
