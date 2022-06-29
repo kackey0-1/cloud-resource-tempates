@@ -66,5 +66,4 @@ class JobController(
             e.printStackTrace()
         }
     }
-
 }
