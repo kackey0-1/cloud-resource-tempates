@@ -16,7 +16,12 @@
 package org.springframework.samples.petclinic.vet
 
 import org.springframework.samples.petclinic.model.Person
-import javax.persistence.*
+import javax.persistence.Entity
+import javax.persistence.FetchType
+import javax.persistence.JoinColumn
+import javax.persistence.JoinTable
+import javax.persistence.ManyToMany
+import javax.persistence.Table
 import javax.xml.bind.annotation.XmlElement
 
 /**
@@ -33,19 +38,23 @@ import javax.xml.bind.annotation.XmlElement
 class Vet : Person() {
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "vet_specialties", joinColumns = [JoinColumn(name = "vet_id")], inverseJoinColumns = [JoinColumn(name = "specialty_id")])
+    @JoinTable(
+        name = "vet_specialties",
+        joinColumns = [JoinColumn(name = "vet_id")],
+        inverseJoinColumns = [JoinColumn(name = "specialty_id")]
+    )
     var specialties: MutableSet<Specialty> = HashSet()
 
 
     @XmlElement
     fun getSpecialties(): List<Specialty> =
-            specialties.sortedWith(compareBy { it.name })
+        specialties.sortedWith(compareBy { it.name })
 
     fun getNrOfSpecialties(): Int =
-            specialties.size
+        specialties.size
 
 
     fun addSpecialty(specialty: Specialty) =
-            specialties.add(specialty)
+        specialties.add(specialty)
 
 }

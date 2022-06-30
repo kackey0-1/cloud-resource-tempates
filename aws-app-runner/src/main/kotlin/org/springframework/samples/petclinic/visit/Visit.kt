@@ -18,7 +18,9 @@ package org.springframework.samples.petclinic.visit
 import org.springframework.format.annotation.DateTimeFormat
 import org.springframework.samples.petclinic.model.BaseEntity
 import java.time.LocalDate
-import javax.persistence.*
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.Table
 import javax.validation.constraints.NotEmpty
 
 /**

@@ -54,8 +54,7 @@ class PetValidator : Validator {
     /**
      * This Validator validates *just* Pet instances
      */
-    override fun supports(clazz: Class<*>)
-            = Pet::class.java.isAssignableFrom(clazz)
+    override fun supports(clazz: Class<*>) = Pet::class.java.isAssignableFrom(clazz)
 
     companion object {
         const val REQUIRED = "required"

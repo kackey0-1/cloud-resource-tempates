@@ -17,8 +17,11 @@ package org.springframework.samples.petclinic.owner
 
 
 import org.springframework.samples.petclinic.model.Person
-import java.util.*
-import javax.persistence.*
+import javax.persistence.CascadeType
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.OneToMany
+import javax.persistence.Table
 import javax.validation.constraints.Digits
 import javax.validation.constraints.NotEmpty
 
@@ -52,7 +55,7 @@ class Owner : Person() {
 
 
     fun getPets(): List<Pet> =
-            pets.sortedWith(compareBy({ it.name }))
+        pets.sortedWith(compareBy({ it.name }))
 
 
     fun addPet(pet: Pet) {
@@ -69,7 +72,7 @@ class Owner : Person() {
      * @return true if owner name is already in use
      */
     fun getPet(name: String): Pet? =
-            getPet(name, false)
+        getPet(name, false)
 
     /**
      * Return the Pet with the given name, or null if none found for this Owner.

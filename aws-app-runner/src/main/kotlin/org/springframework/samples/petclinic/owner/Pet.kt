@@ -20,8 +20,12 @@ import org.springframework.format.annotation.DateTimeFormat
 import org.springframework.samples.petclinic.model.NamedEntity
 import org.springframework.samples.petclinic.visit.Visit
 import java.time.LocalDate
-import java.util.*
-import javax.persistence.*
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.JoinColumn
+import javax.persistence.ManyToOne
+import javax.persistence.Table
+import javax.persistence.Transient
 
 /**
  * Simple business object representing a owner.
@@ -52,7 +56,7 @@ class Pet : NamedEntity() {
 
 
     fun getVisits(): List<Visit> =
-            visits.sortedWith(compareBy { it.date })
+        visits.sortedWith(compareBy { it.date })
 
     fun addVisit(visit: Visit) {
         visits.add(visit)

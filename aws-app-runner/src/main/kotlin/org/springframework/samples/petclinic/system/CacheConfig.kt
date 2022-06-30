@@ -49,5 +49,5 @@ class CacheConfig {
      * configuration mechanism that is provided by the selected JCache implementation.
      */
     private fun createCacheConfiguration(): Configuration<Any, Any> =
-            MutableConfiguration<Any, Any>().setStatisticsEnabled(true)
+        MutableConfiguration<Any, Any>().setStatisticsEnabled(true)
 }

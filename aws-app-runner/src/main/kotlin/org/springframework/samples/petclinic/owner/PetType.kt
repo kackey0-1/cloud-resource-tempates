@@ -15,10 +15,10 @@
  */
 package org.springframework.samples.petclinic.owner
 
-import org.springframework.samples.petclinic.model.NamedEntity;
+import org.springframework.samples.petclinic.model.NamedEntity
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.Entity
+import javax.persistence.Table
 
 /**
  * @author Juergen Hoeller
