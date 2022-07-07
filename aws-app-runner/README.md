@@ -1,4 +1,19 @@
 # Build and Deploy Spring Petclinic Application to AWS App Runner using AWS CodePipeline, Amazon RDS and Terraform
+
+## Deploy
+
+
+```bash
+# Set up SSM parameter for DB passwd
+aws ssm put-parameter --name /database/password  --value mysqlpassword --type SecureString
+
+terraform plan
+
+terraform apply
+```
+
+---
+
 ## Architecture
 ![Architecture](images/Architecture.png)
 
