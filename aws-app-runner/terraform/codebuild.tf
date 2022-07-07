@@ -82,7 +82,7 @@ resource "aws_iam_role_policy_attachment" "codebuild-attach" {
 
 resource "aws_s3_bucket" "cache" {
   bucket = var.codebuild_cache_bucket_name # workaround from https://github.com/hashicorp/terraform-provider-aws/issues/10195
-  acl    = "private"
+  # acl    = "private"
   force_destroy = true
 }
 
@@ -134,7 +134,7 @@ phases:
       - echo Logging in to Amazon ECR...
       - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
-      - IMAGE_TAG=$${COMMIT_HASH:=latest}         
+      - IMAGE_TAG=$${COMMIT_HASH:=latest}
   build:
     commands:
       - echo Build started on `date`
