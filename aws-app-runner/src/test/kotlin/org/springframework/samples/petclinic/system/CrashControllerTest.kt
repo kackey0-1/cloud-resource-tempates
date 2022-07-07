@@ -10,9 +10,9 @@ import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.ResponseBody
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers.model
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers.view
 
 /**
  * Test class for [CrashController]
@@ -30,11 +30,11 @@ class CrashControllerTest {
     @Test
     fun testTriggerException() {
         mockMvc.perform(get("/oups"))
-                .andExpect(view().name("error"))
-                .andExpect(model().attributeExists("error"))
-                .andExpect(content().string(containsString("PetClinic :: a Spring Framework demonstration")))
-                .andExpect(content().string(containsString("Something happened...")))
-                .andExpect(content().string(containsString("Expected: controller used to showcase what happens when an exception is thrown")))
+            .andExpect(view().name("error"))
+            .andExpect(model().attributeExists("error"))
+            .andExpect(content().string(containsString("PetClinic :: a Spring Framework demonstration")))
+            .andExpect(content().string(containsString("Something happened...")))
+            .andExpect(content().string(containsString("Expected: controller used to showcase what happens when an exception is thrown")))
     }
 
 }

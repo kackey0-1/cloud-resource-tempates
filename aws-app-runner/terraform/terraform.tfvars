@@ -1,5 +1,5 @@
 codebuild_cache_bucket_name="apprunner-cache-yyyymmdd-identifier"
-aws_region="us-east-1"
+aws_region="ap-northeast-1"
 stack="apprunner-workshop"
 aws_ecr="petclinic"
 aws_profile="default"
