@@ -1,6 +1,6 @@
 FROM public.ecr.aws/bitnami/java:17.0.3-1
 VOLUME /tmp
-ADD build/libs/aws-app-runner-0.0.1-SNAPSHOT.jar
+ADD build/libs/aws-app-runner-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 80
 RUN apt-get update
 RUN apt-get -y install awscli

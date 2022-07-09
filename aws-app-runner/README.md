@@ -2,6 +2,7 @@
 ## Local Execution
 ```bash
 ./gradlew check
+java -Djava.security.egd=file:/dev/./urandom -jar build/libs/aws-app-runner-0.0.1-SNAPSHOT.jar
 ```
 
 ## Deploy
