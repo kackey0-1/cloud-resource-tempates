@@ -1,15 +1,79 @@
 # Build and Deploy Spring Petclinic Application to AWS App Runner using AWS CodePipeline, Amazon RDS and Terraform
 
 ## Deploy
+### Install necessary resouces
+```bash
 
+aws --version
+pip install awscli --upgrade --user
+sudo yum install -y yum-utils
+sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
+sudo yum -y install terraform
 
+# Install maven
+cd /tmp
+sudo wget https://downloads.apache.org/maven/maven-3/3.8.6/binaries//apache-maven-3.8.6-bin.tar.gz
+sudo tar xf /tmp/apache-maven-*.tar.gz -C /opt
+sudo ln -s /opt/apache-maven-3.8.6 /opt/maven
+
+cat >> ~/.bashrc <<EOF
+export M2_HOME=/opt/maven
+export MAVEN_HOME=/opt/maven
+export PATH=${M2_HOME}/bin:${PATH}
+EOF
+
+source ~/.bashrc
+mvn --version
+
+wget https://github.com/aws-samples/aws-ecs-cicd-terraform/archive/master.zip
+unzip master.zip
+cd aws-ecs-cicd-terraform-master
+```
+
+### Build
+```bash
+cd ~/cloud-resource-templates/aws-app-runner/petclinic
+./gradlew check
+docker build -t petclinic .
+```
+
+### Terraform
 ```bash
 # Set up SSM parameter for DB passwd
 aws ssm put-parameter --name /database/password  --value mysqlpassword --type SecureString
 
-terraform plan
+terraform init
 
+terraform plan
+# before apply services
+# build must be done
 terraform apply
+```
+
+### Git Setup
+
+```bash
+cd ~/environment/aws-apprunner-terraform/petclinic
+git config --global user.name "Your Name"
+git config --global user.email you@example.com
+
+git init
+git add .
+git commit -m "Baseline commit"
+
+### Set up the remote CodeCommit repo
+# An AWS CodeCommit repo was built as part of the pipeline you created. You will now set this up as a remote repo for your local petclinic repo.
+# For authentication purposes, you can use the AWS IAM git credential helper to generate git credentials based on your IAM role permissions. Run:
+git config --global credential.helper '!aws codecommit credential-helper $@'
+git config --global credential.UseHttpPath true
+
+From the output of the Terraform build, we use the output `source_repo_clone_url_http` in our next step.
+
+cd ~/environment/aws-apprunner-terraform/terraform
+export tf_source_repo_clone_url_http=$(terraform output --raw source_repo_clone_url_http)
+cd ~/environment/aws-apprunner-terraform/petclinic
+git remote add origin $tf_source_repo_clone_url_http
+git remote -v
 ```
 
 ---
