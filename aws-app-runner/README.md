@@ -41,7 +41,7 @@ cd aws-ecs-cicd-terraform-master
 
 ### Build
 ```bash
-cd ~/cloud-resource-templates/aws-app-runner/petclinic
+cd ~/cloud-resource-templates/aws-app-runner
 ./gradlew check
 ./gradlew build
 docker build -t petclinic .
@@ -63,7 +63,7 @@ terraform apply
 ### Git Setup
 
 ```bash
-cd ~/environment/aws-apprunner-terraform/petclinic
+cd ~/environment/aws-app-runner
 git config --global user.name "Your Name"
 git config --global user.email you@example.com
 
@@ -79,9 +79,9 @@ git config --global credential.UseHttpPath true
 
 From the output of the Terraform build, we use the output `source_repo_clone_url_http` in our next step.
 
-cd ~/environment/aws-apprunner-terraform/terraform
+cd ~/environment/aws-app-runner/terraform
 export tf_source_repo_clone_url_http=$(terraform output --raw source_repo_clone_url_http)
-cd ~/environment/aws-apprunner-terraform/petclinic
+cd ~/environment/aws-app-runner
 git remote add origin $tf_source_repo_clone_url_http
 git remote -v
 ```
@@ -104,13 +104,13 @@ Clone the source code repository:
 
 ```bash
 cd ~/environment
-git clone https://github.com/aws-samples/aws-apprunner-terraform.git
+git clone https://github.com/aws-samples/aws-app-runner.git
 ```
 
 ## Package the application using Apache Maven
 
 ```bash
-cd ~/environment/aws-apprunner-terraform/petclinic
+cd ~/environment/aws-app-runner/petclinic
 mvn package -Dmaven.test.skip=true
 ```
 The first time you execute this (or any other) command, Maven will need to download the plugins and related dependencies it needs to fulfill the command. From a clean installation of Maven, this can take some time (note: in the output above, it took almost five minutes). If you execute the command again, Maven will now have what it needs, so it won’t need to download anything new and will be able to execute the command quicker.
@@ -171,7 +171,7 @@ aws ssm put-parameter --name /database/password  --value mysqlpassword --type Se
 ### Edit terraform variables
 
 ```bash
-cd ~/environment/aws-apprunner-terraform/terraform
+cd ~/environment/aws-app-runner/terraform
 ```
 
 Edit `terraform.tfvars`, leave the `aws_profile` as `"default"`, and ensure `aws_region` matches your environment, and update `codebuild_cache_bucket_name` to replace the placeholder `yyyymmdd` with today's date, and the identifier `identifier` with something unique to you to create globally unique S3 bucket name. S3 bucket names can include numbers, lowercase letters and hyphens.
@@ -239,7 +239,7 @@ You will now use git to push the petclinic application through the pipeline.
 Start by switching to the `petclinic` directory:
 
 ```bash
-cd ~/environment/aws-apprunner-terraform/petclinic
+cd ~/environment/aws-app-runner/petclinic
 ```
 
 Set up your git username and email address:
@@ -271,14 +271,14 @@ git config --global credential.UseHttpPath true
 From the output of the Terraform build, we use the output `source_repo_clone_url_http` in our next step.
 
 ```bash
-cd ~/environment/aws-apprunner-terraform/terraform
+cd ~/environment/aws-app-runner/terraform
 export tf_source_repo_clone_url_http=$(terraform output --raw source_repo_clone_url_http)
 ```
 
 Set this up as a remote for your git repo as follows:
 
 ```bash
-cd ~/environment/aws-apprunner-terraform/petclinic
+cd ~/environment/aws-app-runner/petclinic
 git remote add origin $tf_source_repo_clone_url_http
 git remote -v
 ```
@@ -323,7 +323,7 @@ The pipeline can now be used to deploy any changes to the application.
 You can try this out by changing the welcome message as follows:
 
 ```
-cd ~/environment/aws-apprunner-terraform/petclinic
+cd ~/environment/aws-app-runner/petclinic
 vi src/main/resources/messages/messages.properties
 ```
 Change the value for the welcome string, for example, to "Hello".
@@ -350,7 +350,7 @@ As before, you can use the console to observe the progression of the change thro
 Make sure that you remember to tear down the stack when finshed to avoid unnecessary charges. You can free up resources as follows:
 
 ```
-cd ~/environment/aws-apprunner-terraform/terraform
+cd ~/environment/aws-app-runner/terraform
 terraform destroy
 ```
 
