@@ -1,4 +1,8 @@
 # Build and Deploy Spring Petclinic Application to AWS App Runner using AWS CodePipeline, Amazon RDS and Terraform
+## Local Execution
+```bash
+./gradlew check
+```
 
 ## Deploy
 ### Install necessary resouces
