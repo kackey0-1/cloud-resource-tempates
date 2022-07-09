@@ -14,7 +14,7 @@ resource "null_resource" "push_petcliniccode" {
 	git commit -m "Baseline commit"
 	git config --global credential.helper '!aws codecommit credential-helper $@'
 	git config --global credential.UseHttpPath true
-	git remote add origin ${aws_codecommit_repository.source_repo.clone_url_http}
+	git remote set-url origin ${aws_codecommit_repository.source_repo.clone_url_http}
 	git remote -v
 	git push -u origin master
       EOT
