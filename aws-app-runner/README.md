@@ -1,4 +1,7 @@
 # Build and Deploy Spring Petclinic Application to AWS App Runner using AWS CodePipeline, Amazon RDS and Terraform
+## Architecture
+![Architecture](images/Architecture.png)
+
 ## Local Execution
 ```bash
 ./gradlew check
@@ -83,8 +86,6 @@ git remote -v
 
 ---
 
-## Architecture
-![Architecture](images/Architecture.png)
 
 #### Clone workshop repository
 <!---
