@@ -1,7 +1,7 @@
 #data "aws_caller_identity" "current" {}
 resource "null_resource" "push_petcliniccode" {
-  provisioner "local-exec" {
-    command = <<EOT
+    provisioner "local-exec" {
+        command     = <<EOT
 	cd ../
 	git config --global --unset credential.helper
 	git config --system --unset credential.helper
@@ -17,9 +17,10 @@ resource "null_resource" "push_petcliniccode" {
 	git remote set-url origin ${aws_codecommit_repository.source_repo.clone_url_http}
 	git remote -v
 	git push -u origin master
-      EOT
-    interpreter = ["/bin/bash", "-c"]
-    working_dir = path.module
-  }
-depends_on = [aws_codecommit_repository.source_repo]
+EOT
+        interpreter = ["/bin/bash", "-c"]
+        working_dir = path.module
+
+    }
+    depends_on = [aws_codecommit_repository.source_repo]
 }
