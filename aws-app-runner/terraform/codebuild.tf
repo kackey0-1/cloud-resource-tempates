@@ -7,7 +7,7 @@ data "aws_caller_identity" "current" {}
 # Codebuild role
 
 resource "aws_iam_role" "codebuild_role" {
-  assume_role_policy = <<EOF
+    assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -21,12 +21,12 @@ resource "aws_iam_role" "codebuild_role" {
   ]
 }
 EOF
-  path = "/"
+    path               = "/"
 }
 
 resource "aws_iam_policy" "codebuild_policy" {
-  description = "Policy to allow codebuild to execute build spec"
-  policy      = <<EOF
+    description = "Policy to allow codebuild to execute build spec"
+    policy      = <<EOF
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -73,55 +73,55 @@ EOF
 }
 
 resource "aws_iam_role_policy_attachment" "codebuild-attach" {
-  role       = aws_iam_role.codebuild_role.name
-  policy_arn = aws_iam_policy.codebuild_policy.arn
+    role       = aws_iam_role.codebuild_role.name
+    policy_arn = aws_iam_policy.codebuild_policy.arn
 }
 
 
 # Codebuild project
 
 resource "aws_s3_bucket" "cache" {
-  bucket = var.codebuild_cache_bucket_name # workaround from https://github.com/hashicorp/terraform-provider-aws/issues/10195
-  # acl    = "private"
-  force_destroy = true
+    bucket        = var.codebuild_cache_bucket_name # workaround from https://github.com/hashicorp/terraform-provider-aws/issues/10195
+    # acl    = "private"
+    force_destroy = true
 }
 
 resource "aws_codebuild_project" "codebuild" {
-  depends_on = [
-    aws_codecommit_repository.source_repo,
-    aws_ecr_repository.petclinic
-  ]
-  name         = "codebuild-${var.source_repo_name}-${var.source_repo_branch}"
-  service_role = aws_iam_role.codebuild_role.arn
-  artifacts {
-    type = "CODEPIPELINE"
-  }
-  cache {
-    type     = "S3"
-    location = var.codebuild_cache_bucket_name
-  }
-  environment {
-    compute_type                = "BUILD_GENERAL1_MEDIUM"
-    image                       = "aws/codebuild/standard:3.0"
-    type                        = "LINUX_CONTAINER"
-    privileged_mode             = true
-    image_pull_credentials_type = "CODEBUILD"
-    environment_variable {
-      name  = "REPOSITORY_URI"
-      value = data.aws_ecr_repository.image_repo.repository_url
+    depends_on = [
+        aws_codecommit_repository.source_repo,
+        aws_ecr_repository.petclinic
+    ]
+    name         = "codebuild-${var.source_repo_name}-${var.source_repo_branch}"
+    service_role = aws_iam_role.codebuild_role.arn
+    artifacts {
+        type = "CODEPIPELINE"
     }
-    environment_variable {
-      name  = "AWS_DEFAULT_REGION"
-      value = var.aws_region
+    cache {
+        type     = "S3"
+        location = var.codebuild_cache_bucket_name
     }
-    environment_variable {
-      name  = "CONTAINER_NAME"
-      value = var.family
+    environment {
+        compute_type                = "BUILD_GENERAL1_MEDIUM"
+        image                       = "aws/codebuild/standard:3.0"
+        type                        = "LINUX_CONTAINER"
+        privileged_mode             = true
+        image_pull_credentials_type = "CODEBUILD"
+        environment_variable {
+            name  = "REPOSITORY_URI"
+            value = data.aws_ecr_repository.image_repo.repository_url
+        }
+        environment_variable {
+            name  = "AWS_DEFAULT_REGION"
+            value = var.aws_region
+        }
+        environment_variable {
+            name  = "CONTAINER_NAME"
+            value = var.family
+        }
     }
-  }
-  source {
-    type      = "CODEPIPELINE"
-    buildspec = <<BUILDSPEC
+    source {
+        type      = "CODEPIPELINE"
+        buildspec = <<BUILDSPEC
 version: 0.2
 runtime-versions:
   java: openjdk8
@@ -156,5 +156,5 @@ cache:
 artifacts:
     files: imagedefinitions.json
 BUILDSPEC
-  }
+    }
 }

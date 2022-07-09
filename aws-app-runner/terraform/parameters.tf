@@ -3,6 +3,6 @@
 # ---------------------------------------------------------------------------------------------------------------------
 
 data "aws_ssm_parameter" "dbpassword" {
-  #  name = "/database/password"
-  name = var.ssm_parameter_store_name
+    #  name = "/database/password"
+    name = var.ssm_parameter_store_name
 }

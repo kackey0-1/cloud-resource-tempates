@@ -5,15 +5,15 @@
 # Code Commit repo
 
 resource "aws_codecommit_repository" "source_repo" {
-  repository_name = var.source_repo_name
-  description     = "This is the app source repository"
+    repository_name = var.source_repo_name
+    description     = "This is the app source repository"
 }
 
 
 # Trigger role and event rule to trigger pipeline
 
 resource "aws_iam_role" "trigger_role" {
-  assume_role_policy = <<EOF
+    assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -28,12 +28,12 @@ resource "aws_iam_role" "trigger_role" {
   ]
 }
 EOF
-  path               = "/"
+    path               = "/"
 }
 
 resource "aws_iam_policy" "trigger_policy" {
-  description = "Policy to allow rule to invoke pipeline"
-  policy      = <<EOF
+    description = "Policy to allow rule to invoke pipeline"
+    policy      = <<EOF
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -50,13 +50,13 @@ EOF
 }
 
 resource "aws_iam_role_policy_attachment" "trigger-attach" {
-  role       = aws_iam_role.trigger_role.name
-  policy_arn = aws_iam_policy.trigger_policy.arn
+    role       = aws_iam_role.trigger_role.name
+    policy_arn = aws_iam_policy.trigger_policy.arn
 }
 
 resource "aws_cloudwatch_event_rule" "trigger_rule" {
-  description   = "Trigger the pipeline on change to repo/branch"
-  event_pattern = <<PATTERN
+    description   = "Trigger the pipeline on change to repo/branch"
+    event_pattern = <<PATTERN
 {
   "source": [ "aws.codecommit" ],
   "detail-type": [ "CodeCommit Repository State Change" ],
@@ -68,20 +68,20 @@ resource "aws_cloudwatch_event_rule" "trigger_rule" {
   }
 }
 PATTERN
-  role_arn      = aws_iam_role.trigger_role.arn
-  is_enabled    = true
+    role_arn      = aws_iam_role.trigger_role.arn
+    is_enabled    = true
 
 }
 
 resource "aws_cloudwatch_event_target" "target_pipeline" {
-  rule      = aws_cloudwatch_event_rule.trigger_rule.name
-  arn       = aws_codepipeline.pipeline.arn
-  role_arn  = aws_iam_role.trigger_role.arn
-  target_id = "${var.source_repo_name}-${var.source_repo_branch}-pipeline"
+    rule      = aws_cloudwatch_event_rule.trigger_rule.name
+    arn       = aws_codepipeline.pipeline.arn
+    role_arn  = aws_iam_role.trigger_role.arn
+    target_id = "${var.source_repo_name}-${var.source_repo_branch}-pipeline"
 }
 
 # Outputs
 
 output "source_repo_clone_url_http" {
-  value = aws_codecommit_repository.source_repo.clone_url_http
+    value = aws_codecommit_repository.source_repo.clone_url_http
 }
