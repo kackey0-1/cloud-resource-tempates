@@ -5,6 +5,7 @@
 ## Local Execution
 ```bash
 ./gradlew check
+./gradlew build
 java -Djava.security.egd=file:/dev/./urandom -jar build/libs/aws-app-runner-0.0.1-SNAPSHOT.jar
 ```
 
@@ -42,6 +43,7 @@ cd aws-ecs-cicd-terraform-master
 ```bash
 cd ~/cloud-resource-templates/aws-app-runner/petclinic
 ./gradlew check
+./gradlew build
 docker build -t petclinic .
 ```
 

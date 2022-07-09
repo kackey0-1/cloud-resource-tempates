@@ -3,7 +3,7 @@ resource "null_resource" "petclinic_springboot" {
     provisioner "local-exec" {
     command = <<EOT
 
-	    cd ../ && ./gradlew check
+	    cd ../ && ./gradlew build
         docker build -t petclinic .
         docker tag petclinic ${data.aws_ecr_repository.image_repo.repository_url}
         # aws ecr get-login-password --region var.region | docker login --username AWS --password-stdin ${data.aws_ecr_repository.image_repo.repository_url}
