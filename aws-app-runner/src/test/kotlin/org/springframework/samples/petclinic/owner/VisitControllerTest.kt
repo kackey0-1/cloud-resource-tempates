@@ -67,5 +67,4 @@ class VisitControllerTest {
             .andExpect(status().isOk)
             .andExpect(view().name("pets/createOrUpdateVisitForm"))
     }
-
 }

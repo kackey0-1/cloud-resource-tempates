@@ -19,7 +19,6 @@ import org.springframework.util.StringUtils
 import org.springframework.validation.Errors
 import org.springframework.validation.Validator
 
-
 /**
  * `Validator` for `Pet` forms.
  *
@@ -59,5 +58,4 @@ class PetValidator : Validator {
     companion object {
         const val REQUIRED = "required"
     }
-
 }

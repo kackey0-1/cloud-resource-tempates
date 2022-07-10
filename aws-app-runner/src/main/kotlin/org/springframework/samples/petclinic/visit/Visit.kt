@@ -48,7 +48,6 @@ class Visit : BaseEntity() {
     @Column(name = "description")
     var description: String? = null
 
-
     /**
      * Holds value of property owner.
      */

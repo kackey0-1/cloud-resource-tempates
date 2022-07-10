@@ -76,5 +76,4 @@ class VisitController(val visits: VisitRepository, val pets: PetRepository) {
             "redirect:/owners/{ownerId}"
         }
     }
-
 }

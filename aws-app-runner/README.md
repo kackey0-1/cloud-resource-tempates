@@ -354,6 +354,6 @@ Once complete, note that you will have to manually empty and delete the S3 bucke
 ```bash
 aws ecr delete-repository \
     --repository-name $REPOSITORY_NAME \
-	--region $AWS_REGION \
+    --region $AWS_REGION \
     --force
 ```

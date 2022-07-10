@@ -121,6 +121,4 @@ class OwnerController(val owners: OwnerRepository, val visits: VisitRepository) 
         model.addAttribute(owner)
         return "owners/ownerDetails"
     }
-
 }
-

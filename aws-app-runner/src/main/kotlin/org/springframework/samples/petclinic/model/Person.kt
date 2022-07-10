@@ -15,7 +15,6 @@
  */
 package org.springframework.samples.petclinic.model
 
-
 import javax.persistence.Column
 import javax.persistence.MappedSuperclass
 import javax.validation.constraints.NotEmpty
@@ -36,5 +35,4 @@ open class Person : BaseEntity() {
     @Column(name = "last_name")
     @NotEmpty
     var lastName = ""
-
 }
