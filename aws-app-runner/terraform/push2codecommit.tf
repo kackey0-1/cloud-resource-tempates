@@ -4,6 +4,7 @@ resource "null_resource" "push_petcliniccode" {
         command     = <<EOT
 	cd ../
     rm -rf .git
+    git config --global init.defaultBranch master
 	git config --global --unset credential.helper
 	git config --system --unset credential.helper
 	git config --global user.name ${var.codecommit_username}
