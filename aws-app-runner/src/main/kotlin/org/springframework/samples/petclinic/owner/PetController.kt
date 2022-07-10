@@ -15,7 +15,6 @@
  */
 package org.springframework.samples.petclinic.owner
 
-
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.ui.set
@@ -100,5 +99,4 @@ class PetController(val pets: PetRepository, val owners: OwnerRepository) {
             "redirect:/owners/{ownerId}"
         }
     }
-
 }

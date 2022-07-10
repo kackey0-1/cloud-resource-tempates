@@ -1,6 +1,5 @@
 package org.springframework.samples.petclinic.owner
 
-
 import org.assertj.core.util.Lists
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -51,7 +50,6 @@ class PetControllerTest {
         given(this.pets.findPetTypes()).willReturn(Lists.newArrayList(cat))
         given(this.owners.findById(TEST_OWNER_ID)).willReturn(Owner())
         given(this.pets.findById(TEST_PET_ID)).willReturn(Pet())
-
     }
 
     @Test
@@ -119,5 +117,4 @@ class PetControllerTest {
             .andExpect(status().isOk)
             .andExpect(view().name("pets/createOrUpdatePetForm"))
     }
-
 }

@@ -15,7 +15,6 @@
  */
 package org.springframework.samples.petclinic.owner
 
-
 import org.springframework.format.annotation.DateTimeFormat
 import org.springframework.samples.petclinic.model.NamedEntity
 import org.springframework.samples.petclinic.visit.Visit
@@ -54,7 +53,6 @@ class Pet : NamedEntity() {
     @Transient
     var visits: MutableSet<Visit> = LinkedHashSet()
 
-
     fun getVisits(): List<Visit> =
         visits.sortedWith(compareBy { it.date })
 
@@ -62,5 +60,4 @@ class Pet : NamedEntity() {
         visits.add(visit)
         visit.petId = this.id
     }
-
 }

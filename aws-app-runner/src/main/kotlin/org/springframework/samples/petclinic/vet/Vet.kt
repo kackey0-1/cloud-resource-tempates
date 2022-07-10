@@ -45,7 +45,6 @@ class Vet : Person() {
     )
     var specialties: MutableSet<Specialty> = HashSet()
 
-
     @XmlElement
     fun getSpecialties(): List<Specialty> =
         specialties.sortedWith(compareBy { it.name })
@@ -53,8 +52,6 @@ class Vet : Person() {
     fun getNrOfSpecialties(): Int =
         specialties.size
 
-
     fun addSpecialty(specialty: Specialty) =
         specialties.add(specialty)
-
 }

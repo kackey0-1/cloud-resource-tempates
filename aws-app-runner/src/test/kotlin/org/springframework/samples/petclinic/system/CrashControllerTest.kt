@@ -1,6 +1,5 @@
 package org.springframework.samples.petclinic.system
 
-
 import org.hamcrest.CoreMatchers.containsString
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -36,5 +35,4 @@ class CrashControllerTest {
             .andExpect(content().string(containsString("Something happened...")))
             .andExpect(content().string(containsString("Expected: controller used to showcase what happens when an exception is thrown")))
     }
-
 }

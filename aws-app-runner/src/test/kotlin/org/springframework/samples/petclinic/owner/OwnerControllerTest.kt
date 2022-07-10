@@ -1,6 +1,5 @@
 package org.springframework.samples.petclinic.owner
 
-
 import org.assertj.core.util.Lists
 import org.hamcrest.Matchers.empty
 import org.hamcrest.Matchers.hasProperty
@@ -24,8 +23,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.model
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.view
 import java.time.LocalDate
-import java.util.*
-
+import java.util.Collections
 
 /**
  * Test class for [OwnerController]
@@ -202,10 +200,8 @@ class OwnerControllerTest {
         Mockito.verify(this.visits).findByPetId(1)
     }
 
-
     companion object {
 
         private const val TEST_OWNER_ID = 1
     }
-
 }
