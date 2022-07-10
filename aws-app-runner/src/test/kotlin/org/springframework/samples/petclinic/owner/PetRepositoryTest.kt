@@ -20,7 +20,6 @@ class PetRepositoryTest(@Autowired private val pets: PetRepository, @Autowired p
         val pet7 = this.pets.findById(7)
         assertThat(pet7.name).startsWith("Samantha")
         assertThat(pet7.owner!!.firstName).isEqualTo("Jean")
-
     }
 
     @Test

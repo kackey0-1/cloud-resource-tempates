@@ -22,5 +22,4 @@ internal class MockMvcValidationConfiguration(private val errorController: Basic
     fun defaultErrorHandler(request: HttpServletRequest, response: HttpServletResponse, ex: Exception): ModelAndView {
         return errorController.errorHtml(request, response)
     }
-
 }

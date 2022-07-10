@@ -15,7 +15,6 @@
  */
 package org.springframework.samples.petclinic.owner
 
-
 import org.springframework.samples.petclinic.model.Person
 import javax.persistence.CascadeType
 import javax.persistence.Column
@@ -53,10 +52,8 @@ class Owner : Person() {
     @OneToMany(cascade = [CascadeType.ALL], mappedBy = "owner")
     var pets: MutableSet<Pet> = HashSet()
 
-
     fun getPets(): List<Pet> =
         pets.sortedWith(compareBy({ it.name }))
-
 
     fun addPet(pet: Pet) {
         if (pet.isNew) {
@@ -92,5 +89,4 @@ class Owner : Person() {
         }
         return null
     }
-
 }

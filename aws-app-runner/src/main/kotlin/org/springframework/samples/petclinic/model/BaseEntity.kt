@@ -38,5 +38,4 @@ open class BaseEntity : Serializable {
 
     val isNew: Boolean
         get() = this.id == null
-
 }
