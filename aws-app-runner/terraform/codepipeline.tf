@@ -4,7 +4,6 @@
 
 
 # Codepipeline role
-
 resource "aws_iam_role" "codepipeline_role" {
     assume_role_policy = <<EOF
 {

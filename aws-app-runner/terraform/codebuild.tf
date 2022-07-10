@@ -139,7 +139,7 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the jar
-      - mvn clean package -Dmaven.test.skip=true
+      - ./gradlew build -x test --no-build-cache
       - echo Building the Docker image...
       - docker build -t $REPOSITORY_URI:latest .
       - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
@@ -150,9 +150,9 @@ phases:
       - docker push $REPOSITORY_URI:latest
       - docker push $REPOSITORY_URI:$IMAGE_TAG
       - printf '[{"name":"%s","imageUri":"%s"}]' $CONTAINER_NAME $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
-cache:
-  paths:
-    - '/root/.m2/**/*'
+#cache:
+#  paths:
+#    - '/root/.m2/**/*'
 artifacts:
     files: imagedefinitions.json
 BUILDSPEC
