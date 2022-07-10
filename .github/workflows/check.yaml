@@ -7,7 +7,7 @@ name: Java CI
 
 on:
   pull_request:
-    types: [opened, edited]
+    branches: ["master"]
 
 jobs:
   build:
