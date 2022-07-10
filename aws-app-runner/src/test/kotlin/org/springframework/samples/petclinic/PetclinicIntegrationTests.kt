@@ -8,11 +8,11 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.samples.petclinic.vet.VetRepository
 import org.springframework.test.context.junit.jupiter.SpringExtension
 
+@Disabled
 @ExtendWith(SpringExtension::class)
 @SpringBootTest
 class PetclinicIntegrationTests(@Autowired private val vets: VetRepository) {
 
-    @Disabled
     @Test
     fun testFindAll() {
         vets.findAll()
