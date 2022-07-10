@@ -5,47 +5,29 @@
 ## Local Execution
 ```bash
 ./gradlew check
-./gradlew build
+./gradlew build -x test
 java -Djava.security.egd=file:/dev/./urandom -jar build/libs/aws-app-runner-0.0.1-SNAPSHOT.jar
 ```
 
 ## Deploy
 ### Install necessary resouces
-```bash
 
+```bash
 aws --version
 pip install awscli --upgrade --user
-# install jdk17
+# install jdk17 for amazon linux 2
 wget https://download.java.net/java/GA/jdk17/0d483333a00540d886896bac774ff48b/35/GPL/openjdk-17_linux-x64_bin.tar.gz
 tar xvf openjdk-17_linux-x64_bin.tar.gz
 sudo mv jdk-17 /opt/
 sudo tee /etc/profile.d/jdk.sh <<EOF
 export JAVA_HOME=/opt/jdk-17
-export PATH=\$PATH:\$JAVA_HOME/bin
+export PATH=$PATH:$JAVA_HOME/bin
 EOF
 
 sudo yum install -y yum-utils
 sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
+# terraform over 1.2
 sudo yum -y install terraform
-
-# Install maven
-cd /tmp
-sudo wget https://downloads.apache.org/maven/maven-3/3.8.6/binaries//apache-maven-3.8.6-bin.tar.gz
-sudo tar xf /tmp/apache-maven-*.tar.gz -C /opt
-sudo ln -s /opt/apache-maven-3.8.6 /opt/maven
-
-cat >> ~/.bashrc <<EOF
-export M2_HOME=/opt/maven
-export MAVEN_HOME=/opt/maven
-export PATH=${M2_HOME}/bin:${PATH}
-EOF
-
-source ~/.bashrc
-mvn --version
-
-wget https://github.com/aws-samples/aws-ecs-cicd-terraform/archive/master.zip
-unzip master.zip
-cd aws-ecs-cicd-terraform-master
 ```
 
 ### Build
