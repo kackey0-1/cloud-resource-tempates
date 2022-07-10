@@ -2,7 +2,7 @@
 resource "null_resource" "push_petcliniccode" {
     provisioner "local-exec" {
         command     = <<EOT
-	cd ../
+	cd ../../
     rm -rf .git
     git config --global init.defaultBranch master
 	git config --global --unset credential.helper
