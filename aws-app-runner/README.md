@@ -70,7 +70,7 @@ git commit -m "Baseline commit"
 git config --global credential.helper '!aws codecommit credential-helper $@'
 git config --global credential.UseHttpPath true
 
-From the output of the Terraform build, we use the output `source_repo_clone_url_http` in our next step.
+# From the output of the Terraform build, we use the output `source_repo_clone_url_http` in our next step.
 
 cd ~/environment/aws-app-runner/terraform
 export tf_source_repo_clone_url_http=$(terraform output --raw source_repo_clone_url_http)
@@ -100,15 +100,7 @@ cd ~/environment
 git clone https://github.com/aws-samples/aws-app-runner.git
 ```
 
-## Package the application using Apache Maven
-
-```bash
-cd ~/environment/aws-app-runner/petclinic
-mvn package -Dmaven.test.skip=true
-```
-The first time you execute this (or any other) command, Maven will need to download the plugins and related dependencies it needs to fulfill the command. From a clean installation of Maven, this can take some time (note: in the output above, it took almost five minutes). If you execute the command again, Maven will now have what it needs, so it won’t need to download anything new and will be able to execute the command quicker.
-
-The compiled java classes were placed in spring-petclinic/target/classes, which is another standard convention employed by Maven. By using the standard conventions, the POM above is small and you haven’t had to tell Maven explicitly where any of your sources are or where the output should go. By following the standard Maven conventions, you can do a lot with little effort.
+---
 
 ## Build and tag the Petclinic docker image
 From the petclinic directory:
