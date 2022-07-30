@@ -18,13 +18,13 @@ phases:
       - ./gradlew build -x test --no-build-cache
       - echo Building the Docker image...
       - docker build -t $REPOSITORY_URI:latest .
-      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
+      - docker tag $REPOSITORY_URI:latest-$COMMIT_HASH $REPOSITORY_URI:$IMAGE_TAG-$COMMIT_HASH
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - docker push $REPOSITORY_URI:latest
-      - docker push $REPOSITORY_URI:$IMAGE_TAG
+      - docker push $REPOSITORY_URI:latest-$COMMIT_HASH
+      - docker push $REPOSITORY_URI:$IMAGE_TAG-$COMMIT_HASH
       - printf '[{"name":"%s","imageUri":"%s"}]' $CONTAINER_NAME $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
 #cache:
 #  paths:
