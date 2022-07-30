@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 class DemoController(
-    private val myService: MyService
+    private val myService: SampleService
 ) {
     @GetMapping("/")
     fun home(): String {
