@@ -1,4 +1,4 @@
-FROM public.ecr.aws/bitnami/java:17.0.3-1
+FROM openjdk:17-alpine
 VOLUME /tmp
 ADD build/libs/aws-app-runner-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 80
