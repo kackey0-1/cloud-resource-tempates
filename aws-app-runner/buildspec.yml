@@ -35,4 +35,3 @@ phases:
 #    - '/root/.m2/**/*'
 artifacts:
   files: imagedefinitions.json
-
