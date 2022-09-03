@@ -20,9 +20,9 @@ class SleuthService(
     @Throws(InterruptedException::class)
     fun doSomeWorkNewSpan() {
         logger.info("I'm in the original span")
-        val newSpan = tracer!!.nextSpan().name("newSpan").start()
+        val newSpan = tracer.nextSpan().name("newSpan").start()
         try {
-            tracer.withSpanInScope(newSpan.start()).use { ws ->
+            tracer.withSpanInScope(newSpan.start()).use {
                 Thread.sleep(1000L)
                 logger.info("I'm in the new span doing some cool work that needs its own span")
             }

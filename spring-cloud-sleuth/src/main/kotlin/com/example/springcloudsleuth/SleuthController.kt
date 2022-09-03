@@ -2,8 +2,10 @@ package com.example.springcloudsleuth
 
 import org.slf4j.LoggerFactory
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.RestController
 import java.util.concurrent.Executor
 
+@RestController
 class SleuthController(
     private val sleuthService: SleuthService,
     private val executor: Executor,
