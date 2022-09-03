@@ -31,18 +31,6 @@ repositories {
     mavenCentral()
 }
 
-// Reference https://docs.gradle.org/current/userguide/java_testing.html#sec:configuring_java_integration_tests
-sourceSets {
-    create("functionalTest") {
-        compileClasspath += sourceSets.main.get().output + sourceSets.test.get().output
-        runtimeClasspath += sourceSets.main.get().output + sourceSets.test.get().output
-    }
-}
-val functionalTestImplementation: Configuration by configurations.getting {
-    extendsFrom(configurations.implementation.get())
-}
-configurations["functionalTestRuntimeOnly"].extendsFrom(configurations.runtimeOnly.get())
-
 dependencyManagement {
     imports {
         mavenBom("org.springframework.cloud:spring-cloud-dependencies:2021.0.1")
@@ -50,9 +38,6 @@ dependencyManagement {
 }
 
 dependencies {
-    val jedisVersion = "3.8.0"
-    val awsJavaSdkV2BomVersion = "2.17.165"
-
     // Spring
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
