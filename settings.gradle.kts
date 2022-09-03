@@ -6,4 +6,5 @@ include(
     "ex-app",
     "spring-batch",
     "spring-kafka",
+    "spring-cloud-sleuth",
 )
