@@ -56,10 +56,6 @@ dependencies {
 
     // Test
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    // Functional Test
-    functionalTestImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
-    functionalTestImplementation("org.junit.jupiter:junit-jupiter-engine:5.8.2")
-    functionalTestImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
 val ktlintVersion = "0.42.1"
