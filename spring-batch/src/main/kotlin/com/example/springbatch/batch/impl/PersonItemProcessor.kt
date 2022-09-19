@@ -1,4 +1,4 @@
-package com.example.springbatch.batchimpl
+package com.example.springbatch.batch.impl
 
 import com.example.springbatch.entity.Person
 import org.slf4j.LoggerFactory

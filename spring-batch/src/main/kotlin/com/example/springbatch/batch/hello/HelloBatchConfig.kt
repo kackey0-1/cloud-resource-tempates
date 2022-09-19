@@ -1,19 +1,18 @@
-package com.example.springbatch.config
+package com.example.springbatch.batch.hello
 
-import com.example.springbatch.batchimpl.MessageTasklet
+import com.example.springbatch.batch.impl.MessageTasklet
 import org.springframework.batch.core.Job
 import org.springframework.batch.core.Step
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory
+import org.springframework.batch.core.launch.support.RunIdIncrementer
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.core.task.TaskExecutor
 
 @Configuration
 class HelloBatchConfig(
     private val jobBuilderFactory: JobBuilderFactory,
     private val stepBuilderFactory: StepBuilderFactory,
-    private val asyncTaskExecutor: TaskExecutor
 ) {
     @Bean
     fun fooJob(helloStep: Step): Job {
@@ -24,8 +23,14 @@ class HelloBatchConfig(
     }
 
     @Bean
-    fun barJob(helloStep: Step, worldStep: Step): Job {
+    fun barJob(
+        helloStep: Step,
+        worldStep: Step,
+        listener: HelloJobListenerAOP
+    ): Job {
         return jobBuilderFactory["myBarJob"]
+            .incrementer(RunIdIncrementer())
+            .listener(listener)
             .flow(helloStep)
             .next(worldStep)
             .end()
@@ -36,7 +41,6 @@ class HelloBatchConfig(
     fun helloStep(): Step {
         return stepBuilderFactory["myHelloStep"]
             .tasklet(MessageTasklet("Hello!"))
-            .taskExecutor(asyncTaskExecutor)
             .build()
     }
 
@@ -44,7 +48,6 @@ class HelloBatchConfig(
     fun worldStep(): Step {
         return stepBuilderFactory["myWorldStep"]
             .tasklet(MessageTasklet("World!"))
-            .taskExecutor(asyncTaskExecutor)
             .build()
     }
 }

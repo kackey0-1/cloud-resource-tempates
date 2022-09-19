@@ -1,6 +1,6 @@
-package com.example.springbatch.config
+package com.example.springbatch.batch.customer
 
-import com.example.springbatch.batchimpl.PersonItemProcessor
+import com.example.springbatch.batch.impl.PersonItemProcessor
 import com.example.springbatch.entity.Person
 import org.springframework.batch.core.Job
 import org.springframework.batch.core.Step
