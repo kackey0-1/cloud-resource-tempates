@@ -23,17 +23,18 @@ class JobController(
 ) {
 
     @PostMapping("/invokeFooJob")
-    fun invokeFooJob(): ResponseEntity<JobExecution> {
+    fun invokeFooJob(): ResponseEntity<String> {
         val jobParameters = JobParametersBuilder().toJobParameters()
         val result = asyncJobLauncher.run(fooJob, jobParameters)
-        return ResponseEntity<JobExecution>(result, HttpStatus.OK)
+        return ResponseEntity<String>(result.toString(), HttpStatus.OK)
     }
 
     @PostMapping("/invokeBarJob")
-    fun invokeBarJob(): ResponseEntity<JobExecution> {
+    fun invokeBarJob(): ResponseEntity<String> {
+        // TODO: add retry count param
         val jobParameters = JobParametersBuilder().toJobParameters()
         val result = asyncJobLauncher.run(barJob, jobParameters)
-        return ResponseEntity<JobExecution>(result, HttpStatus.OK)
+        return ResponseEntity<String>(result.toString(), HttpStatus.OK)
     }
 
     @PostMapping("/invokeImportUserJob")
