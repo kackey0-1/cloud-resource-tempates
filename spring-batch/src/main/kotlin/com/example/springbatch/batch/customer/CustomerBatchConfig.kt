@@ -1,4 +1,4 @@
-package com.example.springbatch.batch
+package com.example.springbatch.batch.customer
 
 import com.example.springbatch.batch.impl.CustomerProcessor
 import com.example.springbatch.entity.Customer
