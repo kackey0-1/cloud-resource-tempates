@@ -32,7 +32,7 @@ class JobController(
     @PostMapping("/invokeBarJob")
     fun invokeBarJob(): ResponseEntity<JobExecution> {
         val jobParameters = JobParametersBuilder().toJobParameters()
-        val result = asyncJobLauncher.run(fooJob, jobParameters)
+        val result = asyncJobLauncher.run(barJob, jobParameters)
         return ResponseEntity<JobExecution>(result, HttpStatus.OK)
     }
 
