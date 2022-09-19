@@ -15,10 +15,10 @@ class AsyncConfig(
 ) : AsyncConfigurer {
 
     @Bean
-    fun asyncJobLauncher(): JobLauncher {
+    fun asyncJobLauncher(asyncTaskExecutor: TaskExecutor): JobLauncher {
         val jobLauncher = SimpleJobLauncher()
         jobLauncher.setJobRepository(jobRepository)
-        jobLauncher.setTaskExecutor(SimpleAsyncTaskExecutor())
+        jobLauncher.setTaskExecutor(asyncTaskExecutor)
         jobLauncher.afterPropertiesSet()
         return jobLauncher
     }

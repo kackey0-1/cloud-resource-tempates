@@ -1,6 +1,6 @@
-package com.example.springbatch.config
+package com.example.springbatch.batch
 
-import com.example.springbatch.batchimpl.CustomerProcessor
+import com.example.springbatch.batch.impl.CustomerProcessor
 import com.example.springbatch.entity.Customer
 import com.example.springbatch.repository.CustomerRepository
 import org.springframework.batch.core.Job

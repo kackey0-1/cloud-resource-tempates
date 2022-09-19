@@ -1,4 +1,4 @@
-package com.example.springbatch.batchimpl
+package com.example.springbatch.batch.impl
 
 import org.slf4j.LoggerFactory
 import org.springframework.batch.core.StepContribution
