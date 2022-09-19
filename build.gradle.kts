@@ -9,6 +9,7 @@ plugins {
     val kotlinVersion = "1.6.21"
 
     id("idea")
+    id("jacoco")
     id("org.springframework.boot") version springBomVersion apply false
     id("io.spring.dependency-management") version dependencyManagementVersion apply false
     id("org.flywaydb.flyway") version "6.5.7" apply false
@@ -51,6 +52,47 @@ tasks {
         kotlinGradle {
             target("*.gradle.kts")
             ktlint(ktlintVersion).userData(editorConfigMap)
+        }
+    }
+}
+
+// jacoco
+// https://docs.gradle.org/current/userguide/jacoco_plugin.html
+jacoco {
+    toolVersion = "0.8.7"
+    reportsDirectory.set(layout.buildDirectory.dir("customJacocoReportDir"))
+}
+tasks.test {
+    // report is always generated after tests run
+    finalizedBy(tasks.jacocoTestReport)
+}
+tasks.jacocoTestReport {
+    reports {
+        xml.required.set(false)
+        csv.required.set(false)
+        html.outputLocation.set(layout.buildDirectory.dir("jacocoHtml"))
+    }
+    // tests are required to run before generating the report
+    dependsOn(tasks.test)
+}
+tasks.jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = "0.5".toBigDecimal()
+            }
+        }
+
+        rule {
+            isEnabled = false
+            element = "CLASS"
+            // includes = listOf("org.gradle.*")
+
+            limit {
+                counter = "LINE"
+                value = "TOTALCOUNT"
+                maximum = "0.3".toBigDecimal()
+            }
         }
     }
 }

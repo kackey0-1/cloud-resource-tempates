@@ -6,5 +6,5 @@ import org.springframework.boot.context.properties.ConstructorBinding
 @ConfigurationProperties(prefix = "service")
 @ConstructorBinding
 class ServiceProperties(
-    var message: String
+    val message: String
 )
