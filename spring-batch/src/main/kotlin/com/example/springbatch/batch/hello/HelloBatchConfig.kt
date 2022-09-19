@@ -1,6 +1,5 @@
 package com.example.springbatch.batch.hello
 
-import com.example.springbatch.batch.customer.JobCompletionNotificationListener
 import com.example.springbatch.batch.impl.MessageTasklet
 import org.springframework.batch.core.Job
 import org.springframework.batch.core.Step
@@ -27,7 +26,7 @@ class HelloBatchConfig(
     fun barJob(
         helloStep: Step,
         worldStep: Step,
-        listener: JobCompletionNotificationListener
+        listener: HelloJobListenerAOP
     ): Job {
         return jobBuilderFactory["myBarJob"]
             .incrementer(RunIdIncrementer())
